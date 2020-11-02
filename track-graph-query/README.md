@@ -24,18 +24,26 @@ The first task consists in allowing the engine to build the CSR by reading infor
 In the same way the engine must be able to load in-memory the data contained in the file in a tabular format (this will help you during the hash join implementation).
 So you will end up with multiple representations for your graph: CSR and table format. You are free to build other representations (e.g. CSC) if you think they can be useful. Remember to justify your choices, as each additional representaion will increase the memory footprint of your application.
 
-Your loading function should be able to load a fixed-size subset of the graph (e.g. up to 1000 vertices or 1000 edges): this will make testing simpler, as you can play with a smaller portion of the overall graph.
+Your loading function should be able to load a fixed-size subset of the graph (e.g. up to 1000 vertices or 1000 edges): this will make testing simpler, as you can play with a smaller portion of the overall graph. In case your personal computer has not enough memory to load the whole dataset, you are allowed to always load a subset of the data. (Note: please, state clearly this case in your final report)
 
 ### Task 2
 
 1. Implement the `traverse` functionality for the engine: given a CSR and a vertex ID, the function returns a list of all the neighbors for that vertex. For `depth = 1` it will return the immediate neighbors, for `depth > 1` you have to perform a more complex traversal (e.g. BFS/DFS)
 
-2. Implement the `join` functionality for the engine:g iven a table and a `user_id1`, the function returns a list of `user_id2` associated to the given one. For `depth = 1`, it corresponds to the SQL query:
+2. Implement the `join` functionality for the engine: given a table and a `user_id1`, the function returns a list of `user_id2` associated to the given one. For `depth = 1`, it corresponds to the SQL query:
 
 ```
 SELECT r1.user_id2 
 FROM relationship r1
 WHERE r1.user_id1 = "input_ID"
+```
+
+or 
+
+```
+SELECT r2.user_id2 
+FROM relationship r1 JOIN relationship r2 
+ON r1.user_id1 = r2.user_id2
 ```
 
 While for `depth > 1` it will require a JOIN like:
@@ -47,6 +55,10 @@ ON r1.user_id2 = r2.user_id1
 WHERE r1.user_id1 = "input_ID" 
 ```
   
+#### Task 2 Bonus
+Implement also a version of the `join` functionality in which you are able to share the hash-table across different JOIN levels.
+Then evaluate this alternative performance in Task 3 and 4   
+  
 ### Task 3
 Use the two base operation you implemented in order to perform the following queries:
 - `(a)->(b)`: all pairs of nodes connected, where `a!=b`
@@ -55,10 +67,12 @@ Use the two base operation you implemented in order to perform the following que
 
 Measure the time (and the memory) that one approach takes (the CSR traversal) against the other (the Hash-Join). 
 
+#### Task 3 bonus
+Additional metrics in task 3 and 4 are welcome: we greatly appreciate if you can measure how much of the memory bandwidth you are using, or build a Roofline Model (https://en.wikipedia.org/wiki/Roofline_model) of your implementations. Any other evaluation that allows deeper understanding performance and hardware utilization is welcome!
+
 ### Task 4
 Given the results obtained by the previous task, design and implement an heuristic allowing your engine to switch efficiently between CSR and Hash-Join in order to achieve the best execution time for the execution of the path.
 
-Additional metrics in task 3 and 4 are welcome: we greatly appreciate if you can measure how much of the memory bandwidth you are using, or build a Roofline Model (https://en.wikipedia.org/wiki/Roofline_model) of your implementations. Any other evaluation that allows deeper understanding performance and hardware utilization is welcome!
 
 ## Submission
 You must submit your solution by December 9th 11.59 PM. 
