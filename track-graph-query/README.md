@@ -75,7 +75,8 @@ Given the results obtained by the previous task, design and implement an heurist
 
 
 ## Submission
-You must submit your solution by December 9th 11.59 PM. 
+You must submit your solution by December 15th 11.59 PM. 
+
 The submission consists in an email to Alberto Parravicini (`alberto.parravicini at polimi.it`), with CC to Guido Walter Di Donato (`guidowalter.didonato at polimi.it`) and Marco Santambrogio (`marco.santambrogio at polimi.it`),
 containing the name of the partecipants, and a link to the `git` repository on which you developed your solution.
 
