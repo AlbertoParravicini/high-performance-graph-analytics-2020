@@ -42,7 +42,7 @@ Each set is a represented by a pair of csv files with `NodeID <--> CaseID` mappi
 - For the training cases, there are `training.core.vertices.csv` and `training.extended.vertices.csv` files, and you can see that info also in the graph (`CoreCaseGraphID` and `ExtendedCaseGraphID` properties). Nodes included in the training cases have the `testingFlag` property set to 0. You can use this nodes for the training and evaluation of your models.
 - For the testing cases, we provide you the `testing.core.vertices.csv` file for core cases, and you can see that info also in the graph (`CoreCaseGraphID` property). Nodes included in the testing cases have the `testingFlag` property set to 1. Your models must predict which nodes of the graph should expand each testing core case. The `testing.extended.vertices.csv` file, containing all the correct predictions, will be used for final evaluation and will be made available after the end of the contest.
 
-**NOTE:** We have noticed little inconsistency between the `testingFlag` property and the info contained in the training and testing cases. To avoid any problem, we suggest to delete all the info included in the `CoreCaseGraphID`, `ExtendedCaseGraphID`, and `testingFlag` properties. Then you can import the correct information from `training.core.vertices.csv`, `training.extended.vertices.csv` and `testing.core.vertices.csv` files.
+**NOTE:** We have noticed little inconsistency between the `testingFlag` property and the info contained in the training and testing cases. To avoid any problem, we suggest to delete all the info included in the `CoreCaseGraphID`, `ExtendedCaseGraphID`, and `testingFlag` properties. Then you can import the correct information for the training cases (`testingFlag == 0`) from the `training.core.vertices.csv` and `training.extended.vertices.csv` files, and for the testing cases (`testingFlag == 1`) from the `testing.core.vertices.csv`.
 
 ## Challenge
 The goal of this challenge consists in implementing a system for automatic graph expansion that, given a graph and a set of subgraphs, automatically finds the nodes of the graph that should expand each subgraph.
@@ -67,7 +67,6 @@ The submission consists in an email to Alberto Parravicini (`alberto.parravicini
 containing the name of the partecipants, and a link to the `git` repository on which you developed your solution.
 
 The repository must contain:
-
 * The source code
 * A README that explains how to execute your solution (we will use the same data we provided to you)
 * A pdf report describing your approach, your models, your results, and any other implementative decision you took that you'd like to share with us. Remember to justify your choices: the easier for us to understand your work, the better it is for you!
@@ -81,9 +80,9 @@ The repository must contain:
 | N345678 | 5                   |
 
 Please note:
-
 * External libraries are allowed: please report name and version of such libraries in the README. 
 * Your code and tests must be runnable using a bash or python script.
 * Keep in mind: the easier for us to replicate your results, the better it is for you!
 * The report should be 6 pages long at most, with minimum font size 11 pt.
+* The file `demo.py` contains the demo shown during the 8th November lecture.
 
